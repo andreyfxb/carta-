@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Carta para Meu Amor 💌</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #fff0f5;
+      text-align: center;
+      padding: 20px;
+      overflow-x: hidden;
+      margin: 0;
+    }
+
+    .envelope {
+      width: 90%;
+      max-width: 300px;
+      height: 200px;
+      background: #ff69b4;
+      margin: 60px auto 20px;
+      position: relative;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    .flap {
+      width: 0;
+      height: 0;
+      border-left: 150px solid transparent;
+      border-right: 150px solid transparent;
+      border-bottom: 100px solid #ff1493;
+      position: absolute;
+      top: -100px;
+      left: 0;
+      z-index: 2;
+      border-radius: 10px;
+    }
+
+    .paper {
+      width: 90%;
+      height: auto;
+      background: white;
+      position: absolute;
+      top: 10px;
+      left: 5%;
+      padding: 15px;
+      box-sizing: border-box;
+      border-radius: 10px;
+      display: none;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      background-color: #ff1493;
+      color: white;
+      cursor: pointer;
+      margin-top: 20px;
+      border-radius: 8px;
+    }
+
+    #pedido, #comida {
+      display: none;
+    }
+
+    #pedido.active {
+      display: block;
+    }
+
+    #naoBtn {
+      position: absolute;
+      transition: top 0.2s, left 0.2s;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CARTA -->
+  <div id="carta">
+    <div class="envelope">
+      <div class="flap"></div>
+      <div class="paper" id="mensagem">
+        <h2>amorzinho 💖</h2>
+        <p>
+          Amor, eu quero te dizer que você é tudo pra mim.<br>
+          Desde que você entrou na minha vida, tudo ficou melhor.<br>
+          Eu te amo com todas as minhas forças, e quero estar ao seu lado pra sempre! 💍💘
+        </p>
+        <button class="btn" onclick="mostrarPedido()">Próximo</button>
+      </div>
+    </div>
+    <button class="btn" onclick="abrirCarta()">Abrir Carta</button>
+  </div>
+
+  <!-- JOGO DO PEDIDO -->
+  <div id="pedido">
+    <h1>Vai fazer amorzinho hoje? </h1>
+    <button class="btn" onclick="respostaSim()">Sim</button>
+    <button class="btn" id="naoBtn" ontouchstart="fugir()" onmouseover="fugir()">Não</button>
+  </div>
+
+  <!-- ESCOLHER COMIDA -->
+  <div id="comida">
+    <h2>O que você quer comer hoje, meu amor? 😋</h2>
+    <select id="escolhaComida" class="btn">
+      <option value="pizza 🍕">Pizza 🍕</option>
+      <option value="sushi 🍣">Sushi 🍣</option>
+      <option value="hambúrguer 🍔">Hambúrguer 🍔</option>
+      <option value="massa 🍝">Massa 🍝</option>
+       <option value="mexicano 🪇">mexicano 🪇</option>
+        <option value="doritos com carne moida  🥟">salgadinho 🥟</option>
+    </select>
+    <br><br>
+    <button class="btn" onclick="enviarWhats()">Enviar para o meu amor 💌</button>
+  </div>
+
+  <!-- SCRIPT -->
+  <script>
+    function abrirCarta() {
+      document.getElementById('mensagem').style.display = 'block';
+    }
+
+    function mostrarPedido() {
+      document.getElementById('carta').style.display = 'none';
+      document.getElementById('pedido').classList.add('active');
+    }
+
+    function respostaSim() {
+      document.getElementById('pedido').style.display = 'none';
+      document.getElementById('comida').style.display = 'block';
+    }
+
+    function fugir() {
+      const btn = document.getElementById('naoBtn');
+      const maxX = window.innerWidth - btn.offsetWidth - 20;
+      const maxY = window.innerHeight - btn.offsetHeight - 20;
+      const randomX = Math.random() * maxX;
+      const randomY = Math.random() * maxY;
+      btn.style.left = `${randomX}px`;
+      btn.style.top = `${randomY}px`;
+    }
+
+    function enviarWhats() {
+      const comida = document.getElementById('escolhaComida').value;
+      const mensagem = `Amor, quero comer ${comida} hoje! ❤️`;
+      const numero = "5511978007440"; // Seu número com DDD e sem traços
+      const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+      window.open(url, "_blank");
+    }
+  </script>
+
+</body>
+</html>
